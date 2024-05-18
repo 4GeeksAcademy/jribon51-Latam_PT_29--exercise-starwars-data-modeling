@@ -26,19 +26,13 @@ class Address(Base):
     person_id = Column(Integer, ForeignKey('person.id'))
     person = relationship(Person)
     
-class Country(Base):
-    __tablename__='country'
-    id=Column(Integer,primary_key=True)
-    name = Column(String(250))
-
 class User(Base):
     __tablename__='user'
     id=Column(Integer,primary_key=True)
-    Name=Column(String(50))
+    name=Column(String(50))
     email=Column(String(50),unique=True)
     password=Column(String(32))
-    id_country=Column(Integer,ForeignKey('country.id'))
-    country=relationship(Country)
+
 
 class Planets(Base):
     __tablename__='planets'
@@ -54,8 +48,35 @@ class FavoritePlanet(Base):
     planet_id = Column(Integer, ForeignKey('planets.id'))
     planet=relationship(Planets)
 
+class Characters(Base):
+    __tablename__='characters'
+    id=Column(Integer,primary_key=True)
+    name=Column(String(50))
+    height = Column(Integer)
+    mass = Column(Integer)
+
+class FavoriteCharacters(Base):
+    __tablename__='favorite_characters'
+    id=Column(Integer,primary_key=True)
+    user_id = Column(Integer, ForeignKey('user.id'))
+    user=relationship(User)
+    characters_id = Column(Integer, ForeignKey('Characters.id'))
+    characters=relationship(Characters)
+
+class StarShips(Base):
+    __tablename__='starships'
+    id=Column(Integer,primary_key=True)
+    name=Column(String(50))
+    model = Column(Integer)
+    lenght = Column(Integer)
 
 
+class FavoriteStarShips(Base):
+    __tablename__='favorite_starships'
+    id=Column(Integer,primary_key=True)
+    user_id = Column(Integer, ForeignKey('user.id'))
+    user=relationship(User)
+    starshipsId=Column(Integer)
 
 
     def to_dict(self):
