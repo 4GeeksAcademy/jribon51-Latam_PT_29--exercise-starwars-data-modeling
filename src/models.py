@@ -60,7 +60,7 @@ class FavoriteCharacters(Base):
     id=Column(Integer,primary_key=True)
     user_id = Column(Integer, ForeignKey('user.id'))
     user=relationship(User)
-    characters_id = Column(Integer, ForeignKey('Characters.id'))
+    characters_id = Column(Integer, ForeignKey('characters.id'))
     characters=relationship(Characters)
 
 class StarShips(Base):
@@ -76,7 +76,8 @@ class FavoriteStarShips(Base):
     id=Column(Integer,primary_key=True)
     user_id = Column(Integer, ForeignKey('user.id'))
     user=relationship(User)
-    starshipsId=Column(Integer)
+    starshipsId=Column(Integer, ForeignKey('starships.id'))
+    starships=relationship(StarShips)
 
 
     def to_dict(self):
